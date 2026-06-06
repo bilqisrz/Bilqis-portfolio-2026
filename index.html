@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bilqis Razin — Enterprise Account Executive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --bg2: #111111;
+    --bg3: #181818;
+    --surface: #1e1e1e;
+    --border: rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.14);
+    --text: #f0ede8;
+    --muted: #8a8580;
+    --accent: #c8a96e;
+    --accent2: #e8c98a;
+    --accent-dim: rgba(200,169,110,0.12);
+    --accent-glow: rgba(200,169,110,0.06);
+    --pink: #d4537e;
+    --teal: #1d9e75;
+    --radius: 4px;
+    --radius-lg: 8px;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+    --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  [data-theme="light"] {
+    --bg: #f8f5f0;
+    --bg2: #f2ede5;
+    --bg3: #ebe5da;
+    --surface: #ffffff;
+    --border: rgba(0,0,0,0.08);
+    --border2: rgba(0,0,0,0.14);
+    --text: #1a1714;
+    --muted: #6b6560;
+    --accent: #9a6f2e;
+    --accent2: #7a5520;
+    --accent-dim: rgba(154,111,46,0.1);
+    --accent-glow: rgba(154,111,46,0.05);
+    --pink: #993556;
+    --teal: #0f6e56;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.7;
+    font-weight: 300;
+    transition: background var(--transition), color var(--transition);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    transition: all var(--transition);
+  }
+  [data-theme="light"] nav { background: rgba(248,245,240,0.9); }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none; font-size: 0.85rem;
+    letter-spacing: 0.06em; text-transform: uppercase; font-weight: 400;
+    transition: color var(--transition);
+  }
+  .nav-links a:hover { color: var(--text); }
+  .theme-toggle {
+    background: none; border: 1px solid var(--border2); color: var(--muted);
+    cursor: pointer; padding: 0.4rem 0.75rem; border-radius: 20px;
+    font-size: 0.75rem; letter-spacing: 0.05em; text-transform: uppercase;
+    font-family: var(--sans); transition: all var(--transition);
+  }
+  .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* SECTIONS */
+  section { padding: 7rem 3rem; max-width: 1200px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--accent); font-weight: 500; margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .section-label::before {
+    content: ''; display: block; width: 28px; height: 1px; background: var(--accent);
+  }
+  h2 {
+    font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 400; line-height: 1.2; color: var(--text); margin-bottom: 1rem;
+  }
+  .lead {
+    font-size: 1.05rem; color: var(--muted); max-width: 560px;
+    line-height: 1.8; margin-bottom: 3rem;
+  }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh; display: flex; align-items: center;
+    padding: 0 3rem; max-width: none;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 80% 50%, rgba(200,169,110,0.04) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 40% at 20% 80%, rgba(212,83,126,0.03) 0%, transparent 60%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0; opacity: 0.03;
+    background-image: linear-gradient(var(--border2) 1px, transparent 1px),
+                      linear-gradient(90deg, var(--border2) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
+  .hero-inner {
+    max-width: 1200px; margin: 0 auto; width: 100%;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+    position: relative; z-index: 1; padding-top: 5rem;
+  }
+  .hero-left {}
+  .hero-eyebrow {
+    font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 1.5rem; opacity: 0;
+    animation: fadeUp 0.8s 0.1s forwards;
+  }
+  h1 {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 400; line-height: 1.05;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+  h1 em { font-style: italic; color: var(--accent); }
+  .hero-sub {
+    font-size: 1.1rem; color: var(--muted); line-height: 1.75;
+    max-width: 480px; margin-bottom: 2.5rem;
+    opacity: 0; animation: fadeUp 0.8s 0.35s forwards;
+  }
+  .hero-ctas {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    opacity: 0; animation: fadeUp 0.8s 0.5s forwards;
+  }
+  .btn-primary {
+    background: var(--accent); color: #0a0a0a;
+    padding: 0.85rem 1.75rem; border-radius: var(--radius);
+    text-decoration: none; font-size: 0.85rem; font-weight: 500;
+    letter-spacing: 0.05em; text-transform: uppercase;
+    transition: all var(--transition); display: inline-block;
+  }
+  .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
+  .btn-secondary {
+    border: 1px solid var(--border2); color: var(--text);
+    padding: 0.85rem 1.75rem; border-radius: var(--radius);
+    text-decoration: none; font-size: 0.85rem; font-weight: 400;
+    letter-spacing: 0.05em; text-transform: uppercase;
+    transition: all var(--transition); display: inline-block;
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+  .hero-right {
+    display: flex; flex-direction: column; gap: 1rem;
+    opacity: 0; animation: fadeUp 0.8s 0.4s forwards;
+  }
+  .hero-stat {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 1.25rem 1.5rem;
+    transition: border-color var(--transition);
+  }
+  .hero-stat:hover { border-color: var(--border2); }
+  .stat-num {
+    font-family: var(--serif); font-size: 2rem; font-weight: 700;
+    color: var(--accent); line-height: 1;
+  }
+  .stat-label { font-size: 0.8rem; color: var(--muted); margin-top: 0.25rem; letter-spacing: 0.04em; }
+  .hero-stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  /* CASE STUDIES */
+  #work { background: var(--bg2); max-width: none; }
+  #work .inner { max-width: 1200px; margin: 0 auto; }
+  .deals-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 1.5px; background: var(--border); border-radius: var(--radius-lg);
+    overflow: hidden; border: 1px solid var(--border);
+  }
+  .deal-card {
+    background: var(--bg2); padding: 2.5rem;
+    cursor: pointer; transition: background var(--transition);
+    position: relative;
+  }
+  .deal-card:hover { background: var(--surface); }
+  .deal-tag {
+    display: inline-block; font-size: 0.68rem; letter-spacing: 0.14em;
+    text-transform: uppercase; font-weight: 500;
+    padding: 0.25rem 0.6rem; border-radius: 2px;
+    margin-bottom: 1.25rem;
+  }
+  .tag-won { background: rgba(29,158,117,0.12); color: var(--teal); }
+  .tag-bc { background: rgba(200,169,110,0.12); color: var(--accent); }
+  .tag-rp { background: rgba(212,83,126,0.12); color: var(--pink); }
+  .deal-card h3 {
+    font-family: var(--serif); font-size: 1.45rem; font-weight: 400;
+    line-height: 1.25; margin-bottom: 0.75rem; color: var(--text);
+  }
+  .deal-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.65; margin-bottom: 1.5rem; }
+  .deal-meta {
+    display: flex; gap: 1.5rem; flex-wrap: wrap;
+  }
+  .deal-kpi { text-align: left; }
+  .deal-kpi .num {
+    font-family: var(--serif); font-size: 1.25rem; color: var(--accent); font-weight: 700;
+  }
+  .deal-kpi .lbl { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.04em; }
+  .deal-expand {
+    margin-top: 1.5rem; overflow: hidden; max-height: 0;
+    transition: max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .deal-card.open .deal-expand { max-height: 600px; }
+  .deal-expand-inner {
+    border-top: 1px solid var(--border); padding-top: 1.5rem; margin-top: 0.5rem;
+  }
+  .deal-expand p { font-size: 0.88rem; color: var(--muted); line-height: 1.75; margin-bottom: 0.75rem; }
+  .deal-expand strong { color: var(--text); font-weight: 500; }
+  .deal-toggle {
+    background: none; border: none; color: var(--accent); cursor: pointer;
+    font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
+    font-family: var(--sans); padding: 0; display: flex; align-items: center; gap: 0.4rem;
+    transition: color var(--transition);
+  }
+  .deal-toggle:hover { color: var(--accent2); }
+  .deal-toggle .arrow { transition: transform 0.3s; display: inline-block; }
+  .deal-card.open .deal-toggle .arrow { transform: rotate(90deg); }
+
+  /* BUSINESS CASES */
+  .bc-section { margin-top: 4rem; padding-top: 4rem; border-top: 1px solid var(--border); }
+  .bc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+  .bc-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 1.75rem;
+    transition: all var(--transition); position: relative; overflow: hidden;
+  }
+  .bc-card::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+    background: var(--accent);
+  }
+  .bc-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+  .bc-card h4 {
+    font-family: var(--serif); font-size: 1.05rem; font-weight: 400;
+    margin-bottom: 0.5rem; color: var(--text);
+  }
+  .bc-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
+  .bc-link {
+    font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent); text-decoration: none; font-weight: 500;
+    display: flex; align-items: center; gap: 0.4rem; transition: gap var(--transition);
+  }
+  .bc-link:hover { gap: 0.7rem; }
+
+  /* ABOUT */
+  #about { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+  #about .about-left {}
+  .timeline { margin-top: 2.5rem; }
+  .tl-item { display: flex; gap: 1.5rem; margin-bottom: 2rem; position: relative; }
+  .tl-dot {
+    flex-shrink: 0; width: 10px; height: 10px; border-radius: 50%;
+    background: var(--accent); margin-top: 0.55rem; position: relative;
+  }
+  .tl-dot::before {
+    content: ''; position: absolute; left: 4px; top: 10px;
+    width: 1px; height: calc(100% + 1.5rem); background: var(--border2);
+  }
+  .tl-item:last-child .tl-dot::before { display: none; }
+  .tl-year { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.08em; margin-bottom: 0.2rem; }
+  .tl-role { font-size: 0.95rem; font-weight: 500; color: var(--text); margin-bottom: 0.15rem; }
+  .tl-co { font-size: 0.8rem; color: var(--accent); }
+  .tl-note { font-size: 0.82rem; color: var(--muted); margin-top: 0.35rem; line-height: 1.55; }
+  .about-right {}
+  .about-body { font-size: 0.95rem; line-height: 1.85; color: var(--muted); }
+  .about-body p { margin-bottom: 1.25rem; }
+  .about-body strong { color: var(--text); font-weight: 500; }
+  .interests {
+    display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 2rem;
+  }
+  .interest-pill {
+    font-size: 0.78rem; padding: 0.35rem 0.85rem;
+    border: 1px solid var(--border2); border-radius: 20px;
+    color: var(--muted); letter-spacing: 0.04em;
+  }
+
+  /* METHODOLOGY */
+  .method-section { margin-top: 5rem; padding-top: 5rem; border-top: 1px solid var(--border); }
+  .method-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
+  .method-card {
+    padding: 1.75rem; border: 1px solid var(--border); border-radius: var(--radius-lg);
+    background: var(--surface); transition: border-color var(--transition);
+  }
+  .method-card:hover { border-color: var(--accent); }
+  .method-num {
+    font-family: var(--serif); font-size: 3rem; font-weight: 700;
+    color: var(--border2); line-height: 1; margin-bottom: 0.75rem;
+  }
+  .method-card h4 { font-size: 0.9rem; font-weight: 500; color: var(--text); margin-bottom: 0.5rem; letter-spacing: 0.02em; }
+  .method-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.65; }
+
+  /* TESTIMONIALS */
+  #testimonials { background: var(--bg3); max-width: none; }
+  #testimonials .inner { max-width: 1200px; margin: 0 auto; }
+  .testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2.5rem; }
+  .testi-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 2rem;
+    transition: border-color var(--transition);
+  }
+  .testi-card:hover { border-color: var(--border2); }
+  .testi-quote {
+    font-family: var(--serif); font-size: 1rem; font-style: italic;
+    color: var(--text); line-height: 1.75; margin-bottom: 1.5rem;
+  }
+  .testi-quote::before { content: '\201C'; color: var(--accent); font-size: 1.5rem; line-height: 0; vertical-align: -0.4rem; margin-right: 0.15rem; }
+  .testi-quote::after { content: '\201D'; color: var(--accent); font-size: 1.5rem; line-height: 0; vertical-align: -0.4rem; margin-left: 0.15rem; }
+  .testi-person { display: flex; align-items: center; gap: 0.75rem; }
+  .testi-avatar {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: var(--accent-dim); border: 1px solid var(--border2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem; font-weight: 500; color: var(--accent); letter-spacing: 0.04em;
+    flex-shrink: 0;
+  }
+  .testi-name { font-size: 0.85rem; font-weight: 500; color: var(--text); }
+  .testi-title { font-size: 0.75rem; color: var(--muted); }
+
+  /* CONTACT */
+  #contact { text-align: center; }
+  #contact h2 { margin: 0 auto 0.75rem; }
+  #contact .lead { margin: 0 auto 2.5rem; }
+  .contact-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .contact-link {
+    display: flex; align-items: center; gap: 0.6rem;
+    padding: 0.85rem 1.5rem; border: 1px solid var(--border2);
+    border-radius: var(--radius); color: var(--text); text-decoration: none;
+    font-size: 0.85rem; letter-spacing: 0.04em; transition: all var(--transition);
+  }
+  .contact-link:hover { border-color: var(--accent); color: var(--accent); }
+  .contact-link svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border); padding: 2rem 3rem;
+    display: flex; align-items: center; justify-content: space-between;
+    max-width: 1200px; margin: 0 auto;
+  }
+  footer p { font-size: 0.78rem; color: var(--muted); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* VIDEO EMBED */
+  .loom-btn {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    padding: 0.85rem 1.5rem; border: 1px solid var(--border2);
+    border-radius: var(--radius); color: var(--text); text-decoration: none;
+    font-size: 0.85rem; letter-spacing: 0.04em; transition: all var(--transition);
+    background: none; cursor: pointer; font-family: var(--sans);
+  }
+  .loom-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .play-icon {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--accent-dim); border: 1px solid var(--border2);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .play-icon svg { width: 10px; height: 10px; fill: var(--accent); margin-left: 1px; }
+
+  /* VIDEO MODAL */
+  .modal-backdrop {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+    z-index: 200; display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity 0.3s;
+    backdrop-filter: blur(8px);
+  }
+  .modal-backdrop.open { opacity: 1; pointer-events: all; }
+  .modal-inner {
+    background: var(--surface); border: 1px solid var(--border2);
+    border-radius: var(--radius-lg); padding: 1.5rem;
+    max-width: 640px; width: 90%; position: relative;
+  }
+  .modal-close {
+    position: absolute; top: 1rem; right: 1rem;
+    background: none; border: none; color: var(--muted);
+    cursor: pointer; font-size: 1.25rem; line-height: 1; font-family: var(--sans);
+  }
+  .modal-inner p {
+    color: var(--muted); font-size: 0.9rem; line-height: 1.7; text-align: center;
+    padding: 2rem 1rem;
+  }
+  .modal-inner a { color: var(--accent); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 5rem 1.5rem; }
+    #hero { padding: 0 1.5rem; }
+    .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .hero-right { display: none; }
+    #about { grid-template-columns: 1fr; gap: 3rem; }
+    .method-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+  }
+
+  /* SCROLL INDICATOR */
+  .scroll-line {
+    position: fixed; top: 0; left: 0; height: 2px;
+    background: var(--accent); z-index: 200;
+    transition: width 0.1s linear;
+  }
+</style>
+</head>
+<body>
+
+<div class="scroll-line" id="scrollLine"></div>
+
+<!-- VIDEO MODAL -->
+<div class="modal-backdrop" id="videoModal" onclick="closeModal(event)">
+  <div class="modal-inner">
+    <button class="modal-close" onclick="document.getElementById('videoModal').classList.remove('open')">✕</button>
+    <p>Add your Loom video link here. Replace this placeholder with an <code>&lt;iframe&gt;</code> embed, or <a href="https://www.loom.com" target="_blank">record your intro at Loom.com</a>.</p>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">Bilqis Razin</a>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#testimonials">Testimonials</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">Light</button>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <p class="hero-eyebrow">Enterprise Account Executive · SaaS · London</p>
+      <h1>Closing deals that<br><em>actually matter</em></h1>
+      <p class="hero-sub">7+ years winning complex, multi-stakeholder enterprise accounts. I don't pitch features — I build business cases that make it easy to say yes.</p>
+      <div class="hero-ctas">
+        <button class="loom-btn" onclick="document.getElementById('videoModal').classList.add('open')">
+          <span class="play-icon"><svg viewBox="0 0 10 12"><polygon points="0,0 10,6 0,12"/></svg></span>
+          Watch intro
+        </button>
+        <a href="#work" class="btn-primary">View my work</a>
+        <a href="#contact" class="btn-secondary">Get in touch</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-stats-row">
+        <div class="hero-stat">
+          <div class="stat-num">$255K</div>
+          <div class="stat-label">Largest deal closed (Checkatrade, 3Y TCV)</div>
+        </div>
+        <div class="hero-stat">
+          <div class="stat-num">104%</div>
+          <div class="stat-label">Quota attainment FY23 at PG Forsta</div>
+        </div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-num">£2.93M</div>
+        <div class="stat-label">Pipeline generated at Foodsteps — 100% self-sourced outbound</div>
+      </div>
+      <div class="hero-stats-row">
+        <div class="hero-stat">
+          <div class="stat-num">7+</div>
+          <div class="stat-label">Years in enterprise SaaS sales</div>
+        </div>
+        <div class="hero-stat">
+          <div class="stat-num">4mo</div>
+          <div class="stat-label">Shortest enterprise cycle with RFP</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WORK / CASE STUDIES -->
+<section id="work" style="max-width:none; background: var(--bg2);">
+  <div class="inner">
+    <div class="section-label reveal">Selected Deals</div>
+    <h2 class="reveal">Where strategy<br>becomes revenue</h2>
+    <p class="lead reveal">A sample of complex enterprise deals — including the business cases I co-created with champions to make each one land.</p>
+
+    <div class="deals-grid">
+
+      <!-- CHECKATRADE -->
+      <div class="deal-card reveal" onclick="toggleDeal(this)">
+        <span class="deal-tag tag-won">Won · $255K TCV · 3-Year</span>
+        <h3>Checkatrade — Voice of Customer Transformation</h3>
+        <p class="deal-desc">Competitive rip-out against an incumbent CX provider. Sold into a new CEO's mandate to digitise the £59B UK home services sector — starting with a $30K CJM engagement, then a $255K platform deal, all in four months.</p>
+        <div class="deal-meta">
+          <div class="deal-kpi"><div class="num">30%→15%</div><div class="lbl">Churn target</div></div>
+          <div class="deal-kpi"><div class="num">£20M</div><div class="lbl">Annual loss addressed</div></div>
+          <div class="deal-kpi"><div class="num">4mo</div><div class="lbl">Sales cycle w/ RFP</div></div>
+        </div>
+        <button class="deal-toggle" style="margin-top:1rem"><span class="arrow">›</span> &nbsp;Read the story</button>
+        <div class="deal-expand">
+          <div class="deal-expand-inner">
+            <p><strong>Discovery</strong> — Checkatrade had 50,000 members churning at 30% (£20M/yr lost) with no clear visibility into why. Two SMS NPS touchpoints and basic reporting. No one owned the insight.</p>
+            <p><strong>Strategy</strong> — Rather than pitching the platform, I ran a free in-person workshop that mapped their end-to-end member journey and surfaced three critical gaps: fragmented data, no self-serve, and no early-warning signal for churn risk. This positioned me as a trusted advisor — not a vendor.</p>
+            <p><strong>Win</strong> — Sold a $30K CJM remapping engagement before any platform discussion. Co-created a one-page business case with the Head of CX (champion) in the language the COO would buy. When an RFP dropped mid-cycle, we already had executive alignment and a pilot running — which put us ahead of Qualtrics and Medallia from day one.</p>
+            <p><strong>Results</strong> — Won $255K TCV over three years. Response rates increased 3% in the first cycle. Delivery team received 10/10 CSAT. Within six months, the scope expanded to include digital feedback ahead of their app launch.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- GREENCORE -->
+      <div class="deal-card reveal" onclick="toggleDeal(this)">
+        <span class="deal-tag tag-won">Won · 6-Figure · 3-Year</span>
+        <h3>Greencore — Unsolicited RFP, Zero Lead Time</h3>
+        <p class="deal-desc">Two days to respond to an unsolicited RFP from the UK's largest food-to-go manufacturer (supplying M&S, Waitrose, Sainsbury's). No existing solution. No pricing structure. Internal resistance. Won anyway.</p>
+        <div class="deal-meta">
+          <div class="deal-kpi"><div class="num">48hr</div><div class="lbl">RFP response window</div></div>
+          <div class="deal-kpi"><div class="num">6-fig</div><div class="lbl">Contract value</div></div>
+          <div class="deal-kpi"><div class="num">Blueprint</div><div class="lbl">For future enterprise deals</div></div>
+        </div>
+        <button class="deal-toggle" style="margin-top:1rem"><span class="arrow">›</span> &nbsp;Read the story</button>
+        <div class="deal-expand">
+          <div class="deal-expand-inner">
+            <p><strong>The challenge</strong> — An unsolicited RFP arrived with 48 hours to respond. We had no product built for their exact requirements, no agreed pricing, and a senior leadership team sceptical about committing resources on a long-shot.</p>
+            <p><strong>How I got internal buy-in</strong> — I framed the opportunity not as revenue risk but as an intelligence exercise: a chance to deeply understand enterprise food manufacturing at scale. That reframe unlocked leadership support and the cross-functional resources needed to submit.</p>
+            <p><strong>The proposal</strong> — Spent months (post-submission) studying the market alongside marketing and product. Navigated multiple stakeholders through solution reviews, custom pricing negotiations, and iterations. Used MEDDPICC throughout and co-created business cases with internal champions to align Greencore's executives with ours.</p>
+            <p><strong>Result</strong> — Won a 3-year, six-figure contract with significant upsell potential across Greencore's supplier network. The deal became the blueprint for pursuing high-value accounts in retail and food manufacturing.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- PUBLIC SECTOR -->
+      <div class="deal-card reveal" onclick="toggleDeal(this)">
+        <span class="deal-tag tag-won">First Public Sector Win · £250K TCV</span>
+        <h3>Borough Council — First Public Sector Logo</h3>
+        <p class="deal-desc">Net-new, self-sourced deal. A council fielding 30–40K calls per quarter at £1.67/call. I anchored the entire commercial case in cost-of-inaction — not product features — and closed a 3-year contract in a notoriously slow buying environment.</p>
+        <div class="deal-meta">
+          <div class="deal-kpi"><div class="num">£250K</div><div class="lbl">TCV (3-year)</div></div>
+          <div class="deal-kpi"><div class="num">30%</div><div class="lbl">Call volume deflection</div></div>
+          <div class="deal-kpi"><div class="num">£75K+</div><div class="lbl">Annual contact centre savings</div></div>
+        </div>
+        <button class="deal-toggle" style="margin-top:1rem"><span class="arrow">›</span> &nbsp;Read the story</button>
+        <div class="deal-expand">
+          <div class="deal-expand-inner">
+            <p><strong>The approach</strong> — Rather than leading with platform capability, I built a cost-per-contact model using the council's own operational data. £1.67 per call × 35,000 calls/quarter = £240K+ annual contact centre spend with no digital fallback.</p>
+            <p><strong>Stakeholder management</strong> — Mapped and engaged across a buying committee spanning CX, digital transformation, and finance. Tailored every message: ROI for finance, resident outcomes for CX, risk reduction for digital. Ran a structured discovery to validate a 30% call deflection target.</p>
+            <p><strong>Unlock</strong> — Reframing the conversation away from features toward cost-of-inaction. Once the £1.67 figure was on the table alongside a 30% deflection projection, the ROI logic became self-evident and the deal essentially wrote its own approval path.</p>
+            <p><strong>Legacy</strong> — The discovery framework, cost-per-contact model, and transformation narrative I built became reusable assets for subsequent public sector conversations — opening a new vertical playbook.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ONE-PAGE BUSINESS CASES -->
+    <div class="bc-section reveal">
+      <div class="section-label">Downloadable Assets</div>
+      <h2 style="font-size: clamp(1.5rem, 3vw, 2.2rem); margin-bottom: 0.75rem;">One-Page Business Cases</h2>
+      <p class="lead" style="margin-bottom: 2rem;">I co-create these with champions — written in the client's language, designed for a 5-minute executive read. These are real examples from live deals.</p>
+      <div class="bc-grid">
+        <div class="bc-card">
+          <h4>Trader Marketplace — Recovering £10–12M in at-risk ARR</h4>
+          <p>Member churn at 30%, £20M annual loss. Business case co-developed with Nick Franklin & Helen Mayhew to position a 3-year VoC transformation programme.</p>
+          <a class="bc-link" href="#" onclick="alert('Attach your Trader Marketplace business case PDF here.')">Download PDF &nbsp;→</a>
+        </div>
+        <div class="bc-card">
+          <h4>MS Software — Transformative Voice of Customer Programme</h4>
+          <p>B2B software company with 6–7% annual churn risk. Business case projecting £8–9M turnover growth through cross-sell and NPS improvement.</p>
+          <a class="bc-link" href="#" onclick="alert('Attach your MS Software business case PDF here.')">Download PDF &nbsp;→</a>
+        </div>
+        <div class="bc-card reveal">
+          <h4>Why I believe in one-pagers</h4>
+          <p>C-suite executives are busy. A concise, outcome-led business case written in the client's language is the single most powerful tool for enabling your champion to close the deal when you're not in the room.</p>
+          <a class="bc-link" href="https://www.linkedin.com/in/bilqisrz/" target="_blank">Connect on LinkedIn &nbsp;→</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-left">
+    <div class="section-label reveal">About Me</div>
+    <h2 class="reveal">Bilqis Razin</h2>
+
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div>
+          <div class="tl-year">2025 – 2026</div>
+          <div class="tl-role">Enterprise Account Executive</div>
+          <div class="tl-co">Foodsteps (acquired by Registrar Corp)</div>
+          <div class="tl-note">£649K achieved (87% of £750K quota). Generated 100% of £2.93M pipeline through outbound. Led RFPs including Greencore win.</div>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div>
+          <div class="tl-year">2022 – 2024</div>
+          <div class="tl-role">Enterprise Account Executive</div>
+          <div class="tl-co">PG Forsta (acquired by Qualtrics)</div>
+          <div class="tl-note">104% quota FY23. Top EMEA performer. Won Checkatrade, Sky, Software AG. First public sector win. Built SDR function.</div>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div>
+          <div class="tl-year">2021 – 2022</div>
+          <div class="tl-role">Enterprise BDR</div>
+          <div class="tl-co">GoCardless</div>
+          <div class="tl-note">103% sales accepted leads average. Generated $1.5M pipeline quarterly for three Account Executives.</div>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div>
+          <div class="tl-year">2018 – 2020</div>
+          <div class="tl-role">SMB–Mid-Market BDR</div>
+          <div class="tl-co">Paddle</div>
+          <div class="tl-note">Top 1% performer in 2020 · 157% of Sales Accepted Leads. Before tech, I led multinational cabin crew teams — where I learned to read a room, manage complex dynamics, and earn trust fast.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-right reveal">
+    <div class="about-body">
+      <p>I grew up between cultures — which gave me an early instinct for reading people, adapting quickly, and building trust with strangers. Before SaaS, I coordinated multinational cabin crew teams. It turns out the skills transfer perfectly: stay calm under pressure, listen more than you talk, and make everyone feel they're the most important person in the room.</p>
+      <p>I moved into tech sales because I love the intellectual puzzle of enterprise deals. Not the transactional kind — the kind where you have to understand a business deeply enough to show them something they couldn't see themselves. <strong>I use MEDDPICC, Challenger, and value-based selling not as scripts but as lenses.</strong></p>
+      <p>My superpower is the one-page business case. I learned it from Nate Nasralla and it changed everything. When you co-create a business case with your champion, you stop being a vendor and start being a partner. You write in their language. You prepare them to sell internally. And you build the urgency that accelerates decisions.</p>
+      <p>I'm currently targeting the compliance and security space — a £12.8B market with high stakes, genuine purpose (fighting financial crime, protecting economies), and the kind of complex, consultative sales motion I thrive in.</p>
+      <p><strong>Beyond work</strong> — I care deeply about people, and I think that shows in how I sell. I'm drawn to roles and companies where the solution genuinely makes someone's working life better. Outside the office, I'm curious about culture, travel (lived across three continents), and anything that involves understanding how people make decisions.</p>
+    </div>
+
+    <div class="interests">
+      <span class="interest-pill">MEDDPICC</span>
+      <span class="interest-pill">Challenger Selling</span>
+      <span class="interest-pill">One-page business cases</span>
+      <span class="interest-pill">CJM remapping</span>
+      <span class="interest-pill">Multi-stakeholder deals</span>
+      <span class="interest-pill">G-Cloud / public sector</span>
+      <span class="interest-pill">Compliance & Security</span>
+      <span class="interest-pill">Fintech</span>
+      <span class="interest-pill">Pipeline strategy</span>
+      <span class="interest-pill">SDR coaching</span>
+    </div>
+
+    <div class="method-section">
+      <div class="section-label" style="margin-top:0">How I sell</div>
+      <div class="method-grid">
+        <div class="method-card reveal">
+          <div class="method-num">01</div>
+          <h4>Diagnose before prescribing</h4>
+          <p>I map the business problem to board-level priorities before touching a product slide. The Checkatrade CJM workshop happened before any platform demo.</p>
+        </div>
+        <div class="method-card reveal">
+          <div class="method-num">02</div>
+          <h4>Enable your champion</h4>
+          <p>Co-created business cases, written in their language. When you're not in the room, your champion closes the deal. I make that easy.</p>
+        </div>
+        <div class="method-card reveal">
+          <div class="method-num">03</div>
+          <h4>Cost of inaction first</h4>
+          <p>Before I pitch anything, I quantify what doing nothing costs. That reframe turns a features conversation into a strategic one.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" style="max-width:none; background: var(--bg3);">
+  <div class="inner">
+    <div class="section-label reveal">Testimonials</div>
+    <h2 class="reveal">What colleagues say</h2>
+    <p class="lead reveal">Snippets from LinkedIn recommendations — from managers, champions, and peers.</p>
+
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <p class="testi-quote">Bilqis has an exceptional ability to build genuine relationships with clients and internal stakeholders alike. She goes beyond the transactional and really seeks to understand the business problem before proposing a solution. Her one-page business cases are the best I've seen — they speak the client's language and make the decision simple.</p>
+        <div class="testi-person">
+          <div class="testi-avatar">MK</div>
+          <div>
+            <div class="testi-name">Add LinkedIn recommender name</div>
+            <div class="testi-title">Add their title & company · LinkedIn</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <p class="testi-quote">What sets Bilqis apart is her strategic thinking. She doesn't just close deals — she builds a programme. The Checkatrade win is a perfect example: she identified the opportunity, created the appetite, and managed every stakeholder from CX to COO. I've rarely seen an AE operate with that level of precision.</p>
+        <div class="testi-person">
+          <div class="testi-avatar">RP</div>
+          <div>
+            <div class="testi-name">Add LinkedIn recommender name</div>
+            <div class="testi-title">Add their title & company · LinkedIn</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <p class="testi-quote">Bilqis coached me as an SDR and transformed how I thought about outbound. She gave me frameworks, not scripts. She helped me understand that every conversation should be anchored in the customer's commercial reality — not our product roadmap. That mindset change was career-defining.</p>
+        <div class="testi-person">
+          <div class="testi-avatar">SL</div>
+          <div>
+            <div class="testi-name">Add LinkedIn recommender name</div>
+            <div class="testi-title">Add their title & company · LinkedIn</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-size:0.8rem; color: var(--muted); margin-top: 2rem; text-align:center;">
+      Add your actual LinkedIn testimonials by replacing the placeholder text above. 
+      <a href="https://www.linkedin.com/in/bilqisrz/" target="_blank" style="color: var(--accent);">View LinkedIn profile</a>
+    </p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label reveal" style="justify-content:center">Let's Talk</div>
+  <h2 class="reveal" style="text-align:center">Ready to build<br><em style="font-style:italic; color:var(--accent)">something together?</em></h2>
+  <p class="lead reveal" style="text-align:center">Whether you're hiring, exploring a partnership, or just want to talk about enterprise sales strategy — I'd love to hear from you.</p>
+  <div class="contact-links reveal">
+    <a href="mailto:bilqis.razin@gmail.com" class="contact-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+      bilqis.razin@gmail.com
+    </a>
+    <a href="https://www.linkedin.com/in/bilqisrz/" target="_blank" class="contact-link">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      LinkedIn
+    </a>
+    <a href="tel:+447983510308" class="contact-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.13 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3 1.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21 16z"/></svg>
+      +44 7983 510 308
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Bilqis Razin · Enterprise Account Executive</p>
+  <p style="font-size:0.72rem">Flat 34, Lido House, W13 9LD · London, UK</p>
+</footer>
+
+<script>
+  // THEME
+  function toggleTheme() {
+    const html = document.documentElement;
+    const btn = document.getElementById('themeBtn');
+    if (html.getAttribute('data-theme') === 'light') {
+      html.removeAttribute('data-theme');
+      btn.textContent = 'Light';
+    } else {
+      html.setAttribute('data-theme', 'light');
+      btn.textContent = 'Dark';
+    }
+  }
+
+  // SCROLL PROGRESS
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const total = document.body.scrollHeight - window.innerHeight;
+    document.getElementById('scrollLine').style.width = (scrolled / total * 100) + '%';
+  });
+
+  // REVEAL ON SCROLL
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+
+  // DEAL TOGGLE
+  function toggleDeal(card) {
+    const wasOpen = card.classList.contains('open');
+    document.querySelectorAll('.deal-card.open').forEach(c => c.classList.remove('open'));
+    if (!wasOpen) card.classList.add('open');
+  }
+
+  // MODAL CLOSE
+  function closeModal(e) {
+    if (e.target === document.getElementById('videoModal')) {
+      document.getElementById('videoModal').classList.remove('open');
+    }
+  }
+
+  // KEYBOARD
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') document.getElementById('videoModal').classList.remove('open');
+  });
+</script>
+</body>
+</html>
